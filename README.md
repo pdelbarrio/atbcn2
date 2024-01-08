@@ -48,18 +48,15 @@ Este proyecto se encuentra bajo la licencia [MIT](LICENSE).
 
 ## Todo list
 
-- [x] Create prototype in Figma
-- [x] Create structure with mocked events
-- [x] Create components
-- [x] Create modal to see event info
-- [x] Connected to Supabase 
-- [x] Implement date manipulation functionality
-- [x] Implement pagination of events by week
-- [x] Add form to create events
-- [x] Add authentication and social login
-- [x] Add middleware
-- [x] Restriction of event insertion to users based on their e-mail address
+- [x] Installed shadcn/ui library
 - [x] Implement dark mode
+- [x] Connected to Supabase
+- [x] Created basic structure
+- [ ] Create modal to see event info
+- [ ] Add form to create events
+- [ ] Add authentication and social login
+- [ ] Add middleware
+- [ ] Restriction of event insertion to users based on their e-mail address
 - [ ] Add testing 
 - [ ] Add possibility of sharing events
 - [ ] Implement PWA functionality 
