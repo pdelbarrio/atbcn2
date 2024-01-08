@@ -3,8 +3,10 @@
 import { EventType } from "@/lib/types";
 import React, { useState } from "react";
 import Tag from "./Tag";
-// import { AnimatePresence } from "framer-motion";
-// import EventModal from "./EventModal";
+import { MdLocationOn } from "react-icons/md";
+import { GoClockFill } from "react-icons/go";
+import { IoTicket } from "react-icons/io5";
+import { FaLink } from "react-icons/fa";
 import {
   Dialog,
   DialogContent,
@@ -67,15 +69,29 @@ const EventRow = ({ event }: Props) => {
         </div>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] bg-white dark:bg-black">
+        <div
+          style={{
+            backgroundImage: `url(${event.poster})`,
+            filter: "grayscale(100%)",
+            opacity: "0.4",
+            position: "absolute",
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            zIndex: -1,
+          }}
+          className="bg-cover"
+        ></div>
         <DialogHeader>
-          <DialogTitle className="text-xl font-semibold text-text dark:text-glow">
+          <DialogTitle className="text-xl bg-slate-200 dark:bg-black font-semibold text-text dark:text-glow p-1 rounded">
             {event.name}
           </DialogTitle>
           <DialogDescription>
             <div className="mt-6">
               <div className="flex items-start">
                 <div className="w-2/3 pr-4">
-                  <p className="text-text dark:text-glow text-base">
+                  <p className="text-black dark:text-glow text-base bg-slate-200 dark:bg-black p-1 rounded">
                     {event.description}
                   </p>
                   <div className="mt-4">
@@ -92,39 +108,40 @@ const EventRow = ({ event }: Props) => {
                 </div>
                 <div className="w-1/3">
                   <Image
-                    className="w-full rounded-lg opacity-30"
+                    className="w-full"
                     src={event.poster ? event.poster : defaultPoster}
                     alt={event.name}
-                    fill
+                    width={200}
+                    height={250}
                   />
                 </div>
               </div>
               <div className="mt-6">
-                <div className="flex items-center dark:bg-glow dark:rounded-lg">
-                  {/* <LocationIcon /> */}
-                  <p className="ml-2 text-text text-sm dark:text-black">
+                <div className="flex items-center bg-slate-200 dark:bg-glow rounded p-1">
+                  <MdLocationOn className="text-black" />
+                  <p className="ml-2 text-black text-sm  dark:text-black">
                     {event.location}
                   </p>
                 </div>
-                <div className="flex items-center mt-2 dark:bg-glow dark:rounded-lg">
-                  {/* <ClockIcon /> */}
-                  <p className="ml-2 text-text text-sm dark:text-black">
+                <div className="flex items-center mt-2 bg-slate-200 dark:bg-glow rounded p-1">
+                  <GoClockFill className="text-black" />
+                  <p className="ml-2 text-black text-sm dark:text-black">
                     {formattedDateStr}
                   </p>
                 </div>
-                <div className="flex items-center mt-2 dark:bg-glow dark:rounded-lg">
-                  {/* <TicketIcon /> */}
-                  <p className="ml-2 text-text text-sm dark:text-black">
+                <div className="flex items-center mt-2 bg-slate-200 dark:bg-glow rounded p-1">
+                  <IoTicket className="text-black" />
+                  <p className="ml-2 text-black text-sm dark:text-black">
                     {event.price}
                   </p>
                 </div>
                 {event.link && (
-                  <div className="flex items-center mt-2 dark:bg-glow dark:rounded-lg">
-                    {/* <LinkIcon /> */}
+                  <div className="flex items-center mt-2 bg-slate-200 dark:bg-glow rounded p-1">
+                    <FaLink className="text-black" />
 
-                    <p className="ml-2 text-text text-sm dark:text-black">
+                    <p className="ml-2 text-black text-sm dark:text-black">
                       <a href={event.link} target="_blank">
-                        Link del evento
+                        Link
                       </a>
                     </p>
                   </div>
