@@ -1,7 +1,7 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 
 export interface EventType {
-  id: number;
+  id: number | string;
   name: string;
   description: string | null;
   date: string;
@@ -76,6 +76,6 @@ export interface AuthFormErrors {
 }
 
 export interface BannedUserType {
-  id: number;
+  id: number | string;
   mai: string;
 }

@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/dialog";
 import { formattedDate } from "@/lib/utils";
 import Image from "next/image";
+import CopyButton from "./CopyButton";
 
 interface Props {
   event: EventType;
@@ -150,6 +151,9 @@ const EventRow = ({ event }: Props) => {
             </div>
           </DialogDescription>
         </DialogHeader>
+        <DialogFooter>
+          <CopyButton event={event} />
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

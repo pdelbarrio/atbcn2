@@ -7,7 +7,7 @@ export type Json =
   | Json[];
 
 export interface Database {
-  id: number;
+  id: number | string;
   name: string;
   description: string | null;
   date: string;
