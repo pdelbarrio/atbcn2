@@ -37,7 +37,8 @@ export default function CopyButton({ event }: { event: EventType }) {
   return (
     <div className="flex">
       <div
-        className="hover:scale-105 relative hover:bg-zinc-700 p-2 rounded-md cursor-pointer"
+        // className="hover:scale-105 relative hover:bg-zinc-700 p-2 rounded-md cursor-pointer"
+        className="hover:scale-105 relative bg-slate-500 p-2 rounded-md cursor-pointer"
         onClick={handleCopy}
       >
         <IoCheckmarkOutline
