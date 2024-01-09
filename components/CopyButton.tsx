@@ -24,7 +24,7 @@ export default function CopyButton({ event }: { event: EventType }) {
     Link: ${event.link}
     Quan: ${formattedDateStr}
     Tags: ${event.tags}
-    Troba més events a https://atbcn.info
+    Troba més esdeveniments a https://atbcn.info
   `;
     try {
       await navigator.clipboard.writeText(Eventtext!);
@@ -35,33 +35,36 @@ export default function CopyButton({ event }: { event: EventType }) {
   };
 
   return (
-    <div
-      className="hover:scale-105 relative hover:bg-zinc-700 p-2 rounded-md cursor-pointer"
-      onClick={handleCopy}
-    >
-      <IoCheckmarkOutline
-        className={cn(
-          "cursor-pointer transition-all w-5 h-5 text-green-500",
-          onDone ? "scale-100" : "scale-0"
-        )}
-        onTransitionEnd={() => {
-          setTimeout(() => {
-            setCopy(false);
-            setDone(false);
-          }, 500);
-        }}
-      />
-
-      <div className="h-full w-full absolute top-0 left-0 flex items-center justify-center">
-        <BsCopy
-          className={cn("transition-all", onCopy ? "scale-0" : "scale-100")}
+    <div className="flex">
+      <div
+        className="hover:scale-105 relative hover:bg-zinc-700 p-2 rounded-md cursor-pointer"
+        onClick={handleCopy}
+      >
+        <IoCheckmarkOutline
+          className={cn(
+            "cursor-pointer transition-all w-5 h-5 text-green-500",
+            onDone ? "scale-100" : "scale-0"
+          )}
           onTransitionEnd={() => {
-            if (onCopy) {
-              setDone(true);
-            }
+            setTimeout(() => {
+              setCopy(false);
+              setDone(false);
+            }, 500);
           }}
         />
+
+        <div className="h-full w-full absolute top-0 left-0 flex items-center justify-center">
+          <BsCopy
+            className={cn("transition-all", onCopy ? "scale-0" : "scale-100")}
+            onTransitionEnd={() => {
+              if (onCopy) {
+                setDone(true);
+              }
+            }}
+          />
+        </div>
       </div>
+      {/* <p className="text-xs ml-auto"> {onDone ? "Copiat" : ""}</p> */}
     </div>
   );
 }

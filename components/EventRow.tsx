@@ -151,9 +151,9 @@ const EventRow = ({ event }: Props) => {
             </div>
           </DialogDescription>
         </DialogHeader>
-        <DialogFooter>
+        <div className="h-full w-full top-0 left-0 flex items-center justify-center">
           <CopyButton event={event} />
-        </DialogFooter>
+        </div>
       </DialogContent>
     </Dialog>
   );

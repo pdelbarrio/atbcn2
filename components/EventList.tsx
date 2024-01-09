@@ -70,7 +70,7 @@ export default function EventList({ events }: any) {
         ) : (
           <div className="bg-card dark:bg-gradient-dark dark:border dark:border-glow rounded-lg shadow-lg overflow-hidden mb-3">
             <p className="text-center p-10 text-text dark:text-glow font-bold">
-              No hay eventos introducidos para esta semana
+              No hi ha esdeveniments introduïts per a aquesta setmana
             </p>
           </div>
         )}
