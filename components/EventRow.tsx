@@ -92,9 +92,11 @@ const EventRow = ({ event }: Props) => {
             <div className="mt-6">
               <div className="flex items-start">
                 <div className="w-2/3 pr-4">
-                  <p className="text-black dark:text-glow text-base bg-slate-200 dark:bg-black p-1 rounded">
-                    {event.description}
-                  </p>
+                  {event.description && (
+                    <p className="text-black dark:text-glow text-base bg-slate-200 dark:bg-black p-1 rounded">
+                      {event.description}
+                    </p>
+                  )}
                   <div className="mt-4">
                     <div className="flex flex-wrap mb-4">
                       <div className="h-10 flex items-center">

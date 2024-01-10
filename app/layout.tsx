@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
+import "react-datepicker/dist/react-datepicker.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/nav/Navbar";
+import { GlobalContextProvider } from "@/context/events.context";
 
 const nunito = Nunito({
   weight: ["200", "400", "600", "700", "800"],
@@ -34,10 +36,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="min-h-screen w-screen">
-            <Navbar />
-            {children}
-          </main>
+          <GlobalContextProvider>
+            <main className="min-h-screen w-screen">
+              <Navbar />
+              {children}
+            </main>
+          </GlobalContextProvider>
         </ThemeProvider>
       </body>
     </html>
