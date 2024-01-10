@@ -52,14 +52,14 @@ Este proyecto se encuentra bajo la licencia [MIT](LICENSE).
 - [x] Implement dark mode
 - [x] Connected to Supabase
 - [x] Created basic structure
-- [ ] Create modal to see event info
+- [x] Create modal to see event info
+- [x] Add button to copy event information
+- [x] Implement PWA functionality 
 - [ ] Add form to create events
 - [ ] Add authentication and social login
 - [ ] Add middleware
 - [ ] Restriction of event insertion to users based on their e-mail address
 - [ ] Add testing 
-- [ ] Add possibility of sharing events
-- [ ] Implement PWA functionality 
 
 
 

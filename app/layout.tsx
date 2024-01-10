@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -11,8 +11,13 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
+  manifest: "/manifest.json",
   title: "@bcn",
-  description: "Encuentra y añade eventos culturales de Barcelona",
+  description: "Troba i afegeix esdeveniments culturals de Barcelona",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#000000",
 };
 
 export default function RootLayout({
