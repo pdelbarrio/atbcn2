@@ -17,7 +17,7 @@ export default function CopyButton({ event }: { event: EventType }) {
 
   const handleCopy = async () => {
     let Eventtext = `
-    Nom event: ${event.name}
+        ${event.name}
     Descripció: ${event.description}
     Preu: ${event.price}
     Ubicació: ${event.location}
