@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { format } from "date-fns";
-import { es } from "date-fns/locale";
+import { es, ca } from "date-fns/locale";
 import * as Yup from "yup";
 
 export function cn(...inputs: ClassValue[]) {
@@ -10,7 +10,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export function formattedDate(date: string, formatStr = "PPp"): string {
   const eventDate = new Date(date);
-  return format(eventDate, formatStr, { locale: es, timeZone: "UTC" } as any);
+  return format(eventDate, formatStr, { locale: ca, timeZone: "UTC" } as any);
 }
 
 export const eventSchema = Yup.object()
