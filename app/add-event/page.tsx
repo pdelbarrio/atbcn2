@@ -1,15 +1,16 @@
 "use client";
 
 import { useGlobalContext } from "@/context/events.context";
-import { EventFormErrors } from "@/lib/types";
-import React, { useState } from "react";
+import { EventFormErrors, EventFormType } from "@/lib/types";
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { CalendarIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, eventSchema } from "@/lib/utils";
 import DatePicker from "react-datepicker";
 import { ca } from "date-fns/locale";
 import { CldUploadWidget } from "next-cloudinary";
+import { AnimatePresence } from "framer-motion";
+import PreviewModal from "@/components/PreviewModal";
 
 export default function AddEvent() {
   const [name, setName] = useState<string>("");
@@ -22,6 +23,7 @@ export default function AddEvent() {
   const [price, setPrice] = useState<string>("");
   const [link, setLink] = useState<string>("");
   const [date, setDate] = useState<Date | null>(new Date());
+  const [bannedUsers, setBannedUsers] = useState([]);
 
   const {
     setPreviewEvent,
@@ -36,8 +38,103 @@ export default function AddEvent() {
     createdBy,
   } = useGlobalContext();
 
-  const handleSubmit = () => {
-    console.log("submit");
+  useEffect(() => {
+    const fetchBannedUsers = async () => {
+      try {
+        const { data, error } = await supabase.from("banned_users").select("*");
+        if (error) {
+          throw new Error(error.message);
+        }
+        // Process the fetched data here
+        setBannedUsers(data);
+      } catch (error) {
+        console.error("Error fetching banned users:", error);
+      }
+    };
+
+    fetchBannedUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const openModal = () => {
+    const reasonIsBanned = isBannedUser(bannedUsers, createdBy);
+
+    if (reasonIsBanned) {
+      // El usuario está baneado
+      // setErrorToast(
+      //   `ESTÁS BANEADO\nRazón: ${reasonIsBanned}. Contacta con atbcnapp@gmail.com`
+      // );
+      console.log("BANNED USER");
+      return;
+    }
+
+    // setShowModal(true);
+    const formattedDate = date ? date.toISOString() : null;
+    const eventDetails = {
+      name: name,
+      description: description,
+      tags: tags,
+      location: location,
+      price: price,
+      date: formattedDate,
+      link: link,
+      poster: uploadedPoster,
+      created_by: createdBy,
+    };
+    setPreviewEvent(eventDetails);
+  };
+
+  function isBannedUser(bannedUsers: any, createdBy: any) {
+    for (let i = 0; i < bannedUsers.length; i++) {
+      if (bannedUsers[i].mail === createdBy) {
+        return bannedUsers[i].reason; // El usuario está baneado por este motivo
+      }
+    }
+    return false; // El usuario no está baneado
+  }
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const errors = await validateForm({
+      name,
+      description,
+      tags,
+      location,
+      price,
+      link,
+    });
+    setErrors(errors);
+
+    if (Object.keys(errors).length === 0) {
+      setShowModal(true);
+    } else {
+      setShowModal(false);
+    }
+  };
+
+  const validateForm = async (values: EventFormType) => {
+    try {
+      await eventSchema.validate(values, { abortEarly: false });
+      return {};
+    } catch (error: any) {
+      const errors: EventFormErrors = {};
+      let tagLength = 0;
+      error.inner.forEach((e: any) => {
+        if (
+          e.path === "tags[0]" ||
+          e.path === "tags[1]" ||
+          e.path === "tags[2]"
+        ) {
+          tagLength++;
+          if (tagLength === 1) {
+            errors.tags = [e.message];
+          }
+        } else {
+          errors[e.path] = e.message;
+        }
+      });
+      return errors;
+    }
   };
 
   const handleTagsChange = (e: any) => {
@@ -181,7 +278,6 @@ export default function AddEvent() {
             </div>
 
             <div className="flex items-center w-1/2 mb-4 text-right">
-              <CalendarIcon className="mr-2 h-6 w-6" />
               <DatePicker
                 className="w-full border border-primary dark:border-glow p-2 rounded-md"
                 minDate={new Date()}
@@ -213,85 +309,64 @@ export default function AddEvent() {
             )}
           </div>
           {/* POSTER Cloudinary Widget*/}
-          {/* <div className="mb-4">
-            <div className="w-full border border-primary dark:border-glow p-2 rounded-md text-center">
-              <div>
-                <div className="">
-                  {uploadedPoster ? null : (
-                    <div>
-                      {displayFile ? (
-                        <p className="text-xs mb-2">
-                          Esta es la <span className="font-bold">PREVIEW</span>{" "}
-                          del poster de tu evento, haz click en el botón de{" "}
-                          <span className="font-bold">UPLOAD</span> o selecciona
-                          otro poster.
-                        </p>
-                      ) : (
-                        <p className="text-text dark:text-glow">
-                          Selecciona un poster para tu evento
-                        </p>
-                      )}
-                      {uploadedPoster ? null : (
-                        <input
-                          type="file"
-                          className="mb-2"
-                          onChange={onChange}
-                        />
-                      )}
-                    </div>
-                  )}
-                  {displayFile ? (
-                    <img className="preview" alt="preview" src={displayFile} />
-                  ) : null}
-                </div>
 
-                {uploadedPoster && (
-                  <img
-                    alt="preview"
-                    className="uploaded"
-                    src={uploadedPoster}
-                  />
-                )}
-                {uploadedPoster ? null : (
-                  <button
-                    className="bg-primary dark:bg-glow text-text font-bold p-2 px-4 rounded ml-auto mb-2"
-                    onClick={() => onSubmitFile(selectedFile)}
-                  >
-                    Upload
-                  </button>
-                )}
-              </div>
-            </div>
-          </div> */}
-          <div className="mb-4">
-            <div className="w-full border border-primary dark:border-glow p-2 rounded-md text-center">
-              <CldUploadWidget uploadPreset="<posterevents>">
+          <div className="w-full border border-primary dark:border-glow p-2 rounded-md text-center">
+            {uploadedPoster && (
+              <img alt="preview" className="uploaded" src={uploadedPoster} />
+            )}
+            {uploadedPoster ? null : (
+              <CldUploadWidget
+                options={{
+                  sources: ["local"],
+                  clientAllowedFormats: [
+                    "jpg",
+                    "png",
+                    "gif",
+                    "bmp",
+                    "svg",
+                    "webp",
+                  ],
+                }}
+                uploadPreset="atbcnposter"
+                onSuccess={(result, { widget }) => {
+                  console.log(result?.info);
+                  if (
+                    typeof result?.info === "object" &&
+                    result?.info !== null
+                  ) {
+                    setUploadedPoster(result?.info?.secure_url);
+                  }
+                  widget.close();
+                }}
+              >
                 {({ open }) => {
+                  function handleOnClick() {
+                    open();
+                  }
                   return (
-                    <button onClick={() => open()}>Carrega un poster</button>
+                    <button onClick={handleOnClick}>Upload an Image</button>
                   );
                 }}
               </CldUploadWidget>
-            </div>
+            )}
           </div>
 
           <div className="mt-8 flex justify-between">
-            {/* PROBAR MODAL SHADCN-UI */}
             <div></div>
-            {/* <button
+            <button
               type="submit"
-              className="bg-primary dark:bg-glow text-text font-bold p-2 px-4 rounded ml-auto mb-2"
+              className="bg-card dark:bg-glow text-black dark:text-black font-bold p-2 px-4 rounded ml-auto mb-2"
               onClick={openModal}
             >
               Preview
-            </button> */}
+            </button>
           </div>
         </form>
         {/* <ToastContainer /> */}
       </div>
-      {/* <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
-      {showModal && Object.keys(errors).length === 0 && <PreviewModal />}
-    </AnimatePresence> */}
+      <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
+        {showModal && Object.keys(errors).length === 0 && <PreviewModal />}
+      </AnimatePresence>
     </div>
   );
 }

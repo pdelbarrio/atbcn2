@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/nav/Navbar";
 import { GlobalContextProvider } from "@/context/events.context";
+import { Toaster } from "@/components/ui/toaster";
 
 const nunito = Nunito({
   weight: ["200", "400", "600", "700", "800"],
@@ -43,6 +44,7 @@ export default function RootLayout({
             </main>
           </GlobalContextProvider>
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   );

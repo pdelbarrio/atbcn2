@@ -17,25 +17,22 @@ export const eventSchema = Yup.object()
   .strict()
   .shape({
     name: Yup.string()
-      .required("El nombre del evento es obligatorio")
-      .max(50, "El nombre no puede tener más de 50 caracteres"),
+      .required("El nom de l'esdeveniment és obligatori")
+      .max(50, "El nom no pot tenir més de 50 caràcters"),
     description: Yup.string().max(
       150,
-      "La descripción no puede tener más de 150 caracteres"
+      "La descripció no pot tenir més de 150 caràcters"
     ),
     tags: Yup.array()
-      .max(3, "No se pueden agregar más de 3 tags")
-      .of(Yup.string().max(15, "Cada tag no puede tener más de 15 caracteres")),
+      .max(3, "No es poden afegir més de 3 tags")
+      .of(Yup.string().max(15, "Cada tag no pot tenir més de 15 caràcters")),
     location: Yup.string()
-      .required("La ubicación es obligatoria")
-      .max(40, "La ubicación no puede tener más de 40 caracteres"),
+      .required("La ubicació és obligatòria")
+      .max(40, "La ubicació no pot tenir més de 40 caràcters"),
     price: Yup.string()
-      .required("El precio es obligatorio")
-      .max(30, "El precio no puede tener más de 30 caracteres"),
-    link: Yup.string().max(
-      200,
-      "El enlace no puede tener más de 200 caracteres"
-    ),
+      .required("El preu és obligatori")
+      .max(30, "El preu no pot tenir més de 30 caràcters"),
+    link: Yup.string().max(200, "L'enllaç no pot tenir més de 200 caràcters"),
   });
 
 export const userSchema = Yup.object().shape({
@@ -43,14 +40,14 @@ export const userSchema = Yup.object().shape({
     .email("Ingrese una dirección de correo electrónico válida")
     .matches(
       /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-      "Ingrese un correo electrónico con un dominio válido"
+      "Ingressi una adreça de correu electrònic vàlida"
     )
-    .required("El correo electrónico es obligatorio"),
+    .required("El correu electrònic és obligatori"),
   password: Yup.string()
-    .min(8, "La contraseña debe tener al menos 8 caracteres")
+    .min(8, "La contrasenya ha de tenir almenys 8 caràcters")
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/,
-      "La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un número"
+      "La contrasenya ha de contenir almenys una lletra majúscula, una lletra minúscula i un número"
     )
-    .required("La contraseña es obligatoria"),
+    .required("La contrasenya és obligatòria"),
 });
