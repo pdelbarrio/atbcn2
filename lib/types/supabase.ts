@@ -1,3 +1,5 @@
+import { SupabaseClient } from "@supabase/supabase-js";
+
 export type Json =
   | string
   | number
@@ -20,4 +22,8 @@ export interface Database {
   completed: boolean;
   created_at: string;
   created_by: number | null;
+}
+
+export interface AuthContextType {
+  supabaseclient: SupabaseClient;
 }

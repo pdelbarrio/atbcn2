@@ -11,6 +11,7 @@ import { ca } from "date-fns/locale";
 import { CldUploadWidget } from "next-cloudinary";
 import { AnimatePresence } from "framer-motion";
 import PreviewModal from "@/components/PreviewModal";
+import Image from "next/image";
 
 export default function AddEvent() {
   const [name, setName] = useState<string>("");
@@ -310,9 +311,15 @@ export default function AddEvent() {
           </div>
           {/* POSTER Cloudinary Widget*/}
 
-          <div className="w-full border border-primary dark:border-glow p-2 rounded-md text-center">
+          <div className="w-full border border-primary dark:border-glow p-2 rounded-md text-center bg-card dark:bg-glow text-black dark:text-black font-bold">
             {uploadedPoster && (
-              <img alt="preview" className="uploaded" src={uploadedPoster} />
+              <Image
+                alt="preview"
+                className="uploaded"
+                src={uploadedPoster}
+                width={200}
+                height={250}
+              />
             )}
             {uploadedPoster ? null : (
               <CldUploadWidget
@@ -344,7 +351,9 @@ export default function AddEvent() {
                     open();
                   }
                   return (
-                    <button onClick={handleOnClick}>Upload an Image</button>
+                    <button onClick={handleOnClick}>
+                      Afegeix un pòster de l&apos;esdeveniment
+                    </button>
                   );
                 }}
               </CldUploadWidget>
@@ -362,7 +371,6 @@ export default function AddEvent() {
             </button>
           </div>
         </form>
-        {/* <ToastContainer /> */}
       </div>
       <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
         {showModal && Object.keys(errors).length === 0 && <PreviewModal />}

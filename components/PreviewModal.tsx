@@ -110,8 +110,13 @@ const PreviewModal = () => {
     } catch (error) {
       setShowModal(false);
       // handle error here
-
-      // Mensaje informativo de error con toaster.
+      toast({
+        description: "Error en inserir les dades",
+        style: {
+          backgroundColor: "#fc0606",
+          color: "#000000",
+        },
+      });
     }
   };
 

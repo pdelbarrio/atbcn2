@@ -1,6 +1,6 @@
 "use server";
 
-import { createSupabaseServerClient } from "../supabase";
+import createSupabaseServerClient from "../supabase";
 import { EventType } from "../types";
 
 export async function getEvents() {
