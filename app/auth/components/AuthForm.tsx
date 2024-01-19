@@ -7,8 +7,8 @@ import RegisterForm from "./RegisterForm";
 export function AuthForm() {
   return (
     <div className="">
-      <Tabs defaultValue="signin" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 mb-10">
+      <Tabs defaultValue="signin" className="max-w-sm">
+        <TabsList className="grid grid-cols-2 mb-10 w-5/6 mx-auto">
           <TabsTrigger value="signin">Inicia sessió</TabsTrigger>
           <TabsTrigger value="register">Registra&apos;t</TabsTrigger>
         </TabsList>
