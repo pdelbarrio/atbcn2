@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { ModeToggle } from "../ToggleTheme";
 import { DialogInfo } from "../DialogInfo";
 import { useRouter } from "next/navigation";
+import { MdLogout } from "react-icons/md";
 import createSupabaseFrontendClient from "@/lib/supabase/supabase";
 
 export default function Navbar() {
@@ -40,10 +41,14 @@ export default function Navbar() {
   };
 
   return (
+    // <nav className="max-w-xl mx-auto p-2 md:max-w-1/2">
     <nav className="max-w-xl mx-auto p-2 md:max-w-1/2">
-      <div className="h-[120px]">
+      {/* <div className="h-[120px]">
         <div className="flex justify-between items-center mt-2">
-          <div className="flex">
+          <div className="flex"> */}
+      <div className="flex flex-col justify-start h-[120px]">
+        <div className="flex justify-between mt-2">
+          <div className="flex flex-col">
             <Link href="/" className="font-bold dark:text-glow text-2xl">
               @bcn
             </Link>
@@ -64,9 +69,10 @@ export default function Navbar() {
             {signOutButton && (
               <button
                 onClick={handleSignout}
-                className="bg-card dark:bg-glow text-white dark:text-black text-xs p-2 px-2 mt-2 rounded-lg"
+                className="flex flex-row gap-2 items-center justify-center bg-btvgray dark:bg-glow text-white dark:text-black text-xs p-2 px-2 mt-2 rounded-lg"
               >
                 SIGN OUT
+                <MdLogout />
               </button>
             )}
           </div>
