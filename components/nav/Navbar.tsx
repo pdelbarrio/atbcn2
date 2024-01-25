@@ -33,20 +33,39 @@ export default function Navbar() {
   //   };
   // }, [supabase]);
 
-  supabase.auth.onAuthStateChange((event, session) => {
-    console.log("event in navbar", event);
-    setTimeout(async () => {
-      // await on other Supabase function here
-      // this runs right after the callback has finished
-      if (event === "SIGNED_IN") {
+  // supabase.auth.onAuthStateChange((event, session) => {
+  //   console.log("event in navbar", event);
+  //   setTimeout(async () => {
+  //     // await on other Supabase function here
+  //     // this runs right after the callback has finished
+  //     if (event === "SIGNED_IN") {
+  //       setSignOutButton(true);
+  //       router.refresh();
+  //     } else if (event === "SIGNED_OUT") {
+  //       setSignOutButton(false);
+  //       router.refresh();
+  //     }
+  //   }, 0);
+  // });
+
+  //FIXME: Conseguir que el setSignOutButton(true) se ejecute inmediatamente después del login, ahora mismo no se de que depende
+  useEffect(() => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      console.log("event in navbar", event);
+      console.log("session in navbar", session);
+      if (event === "SIGNED_IN" || session) {
         setSignOutButton(true);
         router.refresh();
       } else if (event === "SIGNED_OUT") {
         setSignOutButton(false);
         router.refresh();
       }
-    }, 0);
-  });
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   const handleSignout = async () => {
     const { error } = await supabase.auth.signOut();
