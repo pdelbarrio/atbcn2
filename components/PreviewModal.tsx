@@ -12,8 +12,6 @@ import { useRouter } from "next/navigation";
 import { formattedDate } from "@/lib/utils";
 import Image from "next/image";
 import { useToast } from "./ui/use-toast";
-// import { ToastContainer } from "react-toastify";
-// import { setErrorToast, setSuccessToast } from "@/utils/toasts";
 
 const dropIn = {
   hidden: {
@@ -89,6 +87,7 @@ const PreviewModal = () => {
         },
       });
       router.push("/");
+      router.refresh();
       return "Data inserted successfully!";
     } catch (error) {
       toast({
@@ -222,7 +221,6 @@ const PreviewModal = () => {
                   Confirmar
                 </button>
               </div>
-              {/* <ToastContainer /> */}
             </div>
           </motion.div>
         </motion.div>

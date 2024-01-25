@@ -20,7 +20,7 @@ export default function EventList({ events }: any) {
   const currentWeekStart = startOfWeek(currentWeek, { weekStartsOn: 1 });
   const currentWeekEnd = endOfWeek(currentWeek, { weekStartsOn: 1 });
 
-  const eventsThisWeek = events.data.filter((event: EventType) => {
+  const eventsThisWeek = events.filter((event: EventType) => {
     const eventDate = new Date(event.date);
     return eventDate >= currentWeekStart && eventDate <= currentWeekEnd;
   });

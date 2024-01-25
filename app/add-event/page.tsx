@@ -12,6 +12,8 @@ import { CldUploadWidget } from "next-cloudinary";
 import { AnimatePresence } from "framer-motion";
 import PreviewModal from "@/components/PreviewModal";
 import Image from "next/image";
+import { useRouter, redirect } from "next/navigation";
+import createSupabaseFrontendClient from "@/lib/supabase/supabase";
 
 export default function AddEvent() {
   const [name, setName] = useState<string>("");
@@ -26,6 +28,8 @@ export default function AddEvent() {
   const [date, setDate] = useState<Date | null>(new Date());
   const [bannedUsers, setBannedUsers] = useState([]);
 
+  const router = useRouter();
+
   const {
     setPreviewEvent,
     showModal,
@@ -34,20 +38,23 @@ export default function AddEvent() {
     setUploadedPoster,
     tags,
     setTags,
-    supabase,
     setCreatedBy,
     createdBy,
   } = useGlobalContext();
 
+  const supabase = createSupabaseFrontendClient();
+
   useEffect(() => {
+    // console.log("useEffect 1 de banned users");
     const fetchBannedUsers = async () => {
       try {
         const { data, error } = await supabase.from("banned_users").select("*");
+        // console.log(data);
         if (error) {
           throw new Error(error.message);
         }
         // Process the fetched data here
-        setBannedUsers(data);
+        setBannedUsers(data as any);
       } catch (error) {
         console.error("Error fetching banned users:", error);
       }
@@ -55,6 +62,20 @@ export default function AddEvent() {
 
     fetchBannedUsers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  //si hay sesión se mete el mail en createdBy, sino se redirige a /auth
+  useEffect(() => {
+    async function fetchSession() {
+      const session = await supabase.auth.getSession();
+
+      if (session.data.session?.user.email) {
+        setCreatedBy(session.data.session?.user.email);
+      } else {
+        router.push("/auth");
+      }
+    }
+    fetchSession();
   }, []);
 
   const openModal = () => {
