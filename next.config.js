@@ -1,5 +1,15 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        hostname: "res.cloudinary.com",
+        protocol: "https",
+      },
+    ],
+  },
+};
 
 module.exports = nextConfig;
 
@@ -14,16 +24,5 @@ module.exports = nextConfig;
 //     disableDevLogs: true,
 //   },
 // });
-
-// const nextConfig = {
-//   images: {
-//     remotePatterns: [
-//       {
-//         hostname: "res.cloudinary.com",
-//         protocol: "https",
-//       },
-//     ],
-//   },
-// };
 
 // module.exports = withPWA(nextConfig);
