@@ -15,7 +15,6 @@ export async function middleware(req: NextRequest) {
   const {
     data: { session },
   } = await supabase.auth.getSession();
-  console.log("session from middleware", session?.user.email);
 
   if (!session) {
     // Redirect to /auth if there is no session
