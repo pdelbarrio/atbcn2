@@ -1,6 +1,12 @@
 {
   "name": "@bcn",
   "short_name": "@bcn",
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "description": "agenda online",
   "icons": [
     {
       "src": "/icons/android-chrome-192x192.png",
@@ -29,10 +35,5 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "theme_color": "#000000",
-  "background_color": "#000000",
-  "start_url": "/",
-  "display": "standalone",
-  "orientation": "portrait"
+  ]
 }

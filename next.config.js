@@ -1,26 +1,29 @@
 /** @type {import('next').NextConfig} */
+const nextConfig = {};
 
-const withPWA = require("@ducanh2912/next-pwa").default({
-  dest: "public",
-  cacheOnFrontEndNav: true,
-  aggressiveFrontEndNavCaching: true,
-  reloadOnOnline: true,
-  swcMinify: true,
-  disable: false,
-  workboxOptions: {
-    disableDevLogs: true,
-  },
-});
+module.exports = nextConfig;
 
-const nextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        hostname: "res.cloudinary.com",
-        protocol: "https",
-      },
-    ],
-  },
-};
+// const withPWA = require("@ducanh2912/next-pwa").default({
+//   dest: "public",
+//   cacheOnFrontEndNav: true,
+//   aggressiveFrontEndNavCaching: true,
+//   reloadOnOnline: true,
+//   swcMinify: true,
+//   disable: false,
+//   workboxOptions: {
+//     disableDevLogs: true,
+//   },
+// });
 
-module.exports = withPWA(nextConfig);
+// const nextConfig = {
+//   images: {
+//     remotePatterns: [
+//       {
+//         hostname: "res.cloudinary.com",
+//         protocol: "https",
+//       },
+//     ],
+//   },
+// };
+
+// module.exports = withPWA(nextConfig);
