@@ -24,7 +24,7 @@ export default function SignInForm() {
       startTransition(async () => {
         const data = { email, password };
 
-        const result = signInWithEmailAndPassword(data);
+        const result = await signInWithEmailAndPassword(data);
         const { error } = JSON.parse(await result);
 
         if (error?.message) {

@@ -15,23 +15,38 @@ export default function Navbar() {
   const supabase = createSupabaseFrontendClient();
   const router = useRouter();
 
-  useEffect(() => {
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((event: any, session: any) => {
-      console.log("event", event);
-      if (session) {
+  // useEffect(() => {
+  //   const {
+  //     data: { subscription },
+  //   } = supabase.auth.onAuthStateChange((event: any, session: any) => {
+  //     console.log("event", event);
+  //     if (session) {
+  //       setSignOutButton(true);
+  //       router.refresh();
+  //     } else {
+  //       setSignOutButton(false);
+  //       router.refresh();
+  //     }
+  //   });
+  //   return () => {
+  //     subscription.unsubscribe();
+  //   };
+  // }, [supabase]);
+
+  supabase.auth.onAuthStateChange((event, session) => {
+    console.log("event in navbar", event);
+    setTimeout(async () => {
+      // await on other Supabase function here
+      // this runs right after the callback has finished
+      if (event === "SIGNED_IN") {
         setSignOutButton(true);
         router.refresh();
-      } else {
+      } else if (event === "SIGNED_OUT") {
         setSignOutButton(false);
         router.refresh();
       }
-    });
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, [supabase, router]);
+    }, 0);
+  });
 
   const handleSignout = async () => {
     const { error } = await supabase.auth.signOut();

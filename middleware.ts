@@ -3,8 +3,6 @@ import { NextResponse, type NextRequest } from "next/server";
 import { createSupabaseServerComponentClient } from "./lib/supabase/supabaseAppRouterClient";
 
 export async function middleware(req: NextRequest) {
-  console.log("Enter Middleware");
-
   const res = NextResponse.next();
   const url = req.nextUrl.clone();
   const url2 = req.nextUrl.clone();

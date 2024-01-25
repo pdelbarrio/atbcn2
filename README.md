@@ -54,12 +54,13 @@ Este proyecto se encuentra bajo la licencia [MIT](LICENSE).
 - [x] Created basic structure
 - [x] Create modal to see event info
 - [x] Add button to copy event information
-- [x] Implement PWA functionality 
-- [ ] Add form to create events
-- [ ] Add authentication and social login
-- [ ] Add middleware
+- [ ] Implement PWA functionality 
+- [x] Migrate to the new @supabase/ssr package
+- [x] Add form to create events
+- [x] Add authentication and social login
+- [x] Add middleware
 - [ ] Restriction of event insertion to users based on their e-mail address
-- [ ] Add testing 
+- [ ] Add e2e testing with Cypress
 
 
 

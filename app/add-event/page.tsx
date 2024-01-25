@@ -12,8 +12,7 @@ import { CldUploadWidget } from "next-cloudinary";
 import { AnimatePresence } from "framer-motion";
 import PreviewModal from "@/components/PreviewModal";
 import Image from "next/image";
-import { useRouter, redirect } from "next/navigation";
-import createSupabaseFrontendClient from "@/lib/supabase/supabase";
+import { useRouter } from "next/navigation";
 
 export default function AddEvent() {
   const [name, setName] = useState<string>("");
@@ -37,12 +36,11 @@ export default function AddEvent() {
     uploadedPoster,
     setUploadedPoster,
     tags,
+    supabase,
     setTags,
     setCreatedBy,
     createdBy,
   } = useGlobalContext();
-
-  const supabase = createSupabaseFrontendClient();
 
   useEffect(() => {
     // console.log("useEffect 1 de banned users");
