@@ -1,10 +1,11 @@
+"use server";
 // import createSupabaseFrontendClient from "../supabase/supabase";
 import { createSupabaseAppServerClient } from "../supabase/supabaseAppRouterClient";
 
 // const supabase = createSupabaseFrontendClient();
 const supabase = createSupabaseAppServerClient();
 
-export const revalidate = 60;
+// export const revalidate = 60;
 
 export async function getEvents() {
   const currentDate = new Date();
