@@ -75,7 +75,7 @@ export default function EventList({ events }: any) {
           </div>
         )}
       </div>
-      <div className="max-w-screen-sm mx-auto px-4">
+      <div className="max-w-screen-sm mx-auto px-4 pb-20">
         <div className="flex justify-between py-4">
           <div>
             {isFirstWeek ? (

@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/nav/Navbar";
 import { GlobalContextProvider } from "@/context/events.context";
 import { Toaster } from "@/components/ui/toaster";
+import { Footer } from "@/components/Footer";
 
 const nunito = Nunito({
   weight: ["200", "400", "600", "700", "800"],
@@ -30,7 +31,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={nunito.className}>
+      <body className={`${nunito.className} relative min-h-screen`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -41,6 +42,9 @@ export default function RootLayout({
             <main className="min-h-screen w-screen">
               <Navbar />
               {children}
+              <div className="bottom-0 absolute w-full">
+                <Footer />
+              </div>
             </main>
           </GlobalContextProvider>
         </ThemeProvider>
