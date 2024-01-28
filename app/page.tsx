@@ -1,5 +1,3 @@
-"use server";
-
 import EventList from "@/components/EventList";
 import { getEvents } from "@/lib/actions/events";
 import React from "react";
