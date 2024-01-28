@@ -1,6 +1,8 @@
-import createSupabaseFrontendClient from "../supabase/supabase";
+// import createSupabaseFrontendClient from "../supabase/supabase";
+import { createSupabaseAppServerClient } from "../supabase/supabaseAppRouterClient";
 
-const supabase = createSupabaseFrontendClient();
+// const supabase = createSupabaseFrontendClient();
+const supabase = createSupabaseAppServerClient();
 
 export const revalidate = 60;
 
