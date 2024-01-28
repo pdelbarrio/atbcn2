@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-import { createSupabaseServerComponentClient } from "./lib/supabase/supabaseAppRouterClient";
+// import { createSupabaseServerComponentClient } from "./lib/supabase/supabaseAppRouterClient";
+import { createSupabaseServerClient } from "./lib/supabase";
 
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
@@ -9,7 +10,7 @@ export async function middleware(req: NextRequest) {
   url.pathname = "/auth";
   url2.pathname = "/add-event";
 
-  const supabase = createSupabaseServerComponentClient();
+  const supabase = await createSupabaseServerClient();
   const {
     data: { session },
   } = await supabase.auth.getSession();
