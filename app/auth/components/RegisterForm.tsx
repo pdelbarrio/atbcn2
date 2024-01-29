@@ -5,9 +5,10 @@ import { useToast } from "@/components/ui/use-toast";
 import { AuthFormErrors } from "@/lib/types";
 import { cn, userSchema } from "@/lib/utils";
 import React, { useState, useTransition } from "react";
-import { signUpWithEmailAndPassword } from "../actions";
+// import { signUpWithEmailAndPassword } from "../actions";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useRouter } from "next/navigation";
+import { useAuthContext } from "@/context/auth.context";
 
 export default function RegisterForm() {
   const [email, setEmail] = useState("");
@@ -17,6 +18,8 @@ export default function RegisterForm() {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
+  const { supabaseclient } = useAuthContext();
+
   const handleEmailChange = (e: any) => setEmail(e.target.value);
   const handlePasswordChange = (e: any) => setPassword(e.target.value);
 
@@ -24,11 +27,11 @@ export default function RegisterForm() {
     try {
       await userSchema.validate({ email, password }, { abortEarly: false });
       startTransition(async () => {
-        const data = { email, password };
-
-        const result = signUpWithEmailAndPassword(data);
-        const { error } = JSON.parse(await result);
-
+        const { data, error } = await supabaseclient.auth.signUp({
+          email,
+          password,
+          options: { data: { role: "user" } },
+        });
         if (error?.message) {
           toast({
             style: {
@@ -45,8 +48,9 @@ export default function RegisterForm() {
             },
             description: <code className="text-black">Registre correcte</code>,
           });
-          // router.push("/add-event");
+
           router.refresh();
+          router.push("/add-event");
         }
       });
     } catch (error: any) {

@@ -7,54 +7,18 @@ import { DialogInfo } from "../DialogInfo";
 import { useRouter } from "next/navigation";
 import { MdLogout } from "react-icons/md";
 import { GrAddCircle } from "react-icons/gr";
-import createSupabaseFrontendClient from "@/lib/supabase/supabase";
+import { useAuthContext } from "@/context/auth.context";
 
 export default function Navbar() {
   const [signOutButton, setSignOutButton] = useState(false);
 
-  const supabase = createSupabaseFrontendClient();
+  const { supabaseclient } = useAuthContext();
   const router = useRouter();
 
-  // useEffect(() => {
-  //   const {
-  //     data: { subscription },
-  //   } = supabase.auth.onAuthStateChange((event: any, session: any) => {
-  //     console.log("event", event);
-  //     if (session) {
-  //       setSignOutButton(true);
-  //       router.refresh();
-  //     } else {
-  //       setSignOutButton(false);
-  //       router.refresh();
-  //     }
-  //   });
-  //   return () => {
-  //     subscription.unsubscribe();
-  //   };
-  // }, [supabase]);
-
-  // supabase.auth.onAuthStateChange((event, session) => {
-  //   console.log("event in navbar", event);
-  //   setTimeout(async () => {
-  //     // await on other Supabase function here
-  //     // this runs right after the callback has finished
-  //     if (event === "SIGNED_IN") {
-  //       setSignOutButton(true);
-  //       router.refresh();
-  //     } else if (event === "SIGNED_OUT") {
-  //       setSignOutButton(false);
-  //       router.refresh();
-  //     }
-  //   }, 0);
-  // });
-
-  //FIXME: Conseguir que el setSignOutButton(true) se ejecute inmediatamente después del login, ahora mismo no se de que depende
   useEffect(() => {
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
-      console.log("event in navbar", event);
-      console.log("session in navbar", session);
+    } = supabaseclient.auth.onAuthStateChange((event, session) => {
       if (event === "SIGNED_IN" || session) {
         setSignOutButton(true);
         router.refresh();
@@ -65,10 +29,10 @@ export default function Navbar() {
     });
 
     return () => subscription.unsubscribe();
-  }, []);
+  }, [router, supabaseclient.auth]);
 
   const handleSignout = async () => {
-    const { error } = await supabase.auth.signOut();
+    const { error } = await supabaseclient.auth.signOut();
     router.push("/");
     if (error) throw new Error("Error durante el cierre de sesión");
     router.push("/");

@@ -4,28 +4,31 @@ import { Input } from "@/components/ui/input";
 import { AuthFormErrors } from "@/lib/types";
 import { cn, userSchema } from "@/lib/utils";
 import React, { useState, useTransition } from "react";
-import { signInWithEmailAndPassword } from "../actions";
 import { toast } from "@/components/ui/use-toast";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useRouter } from "next/navigation";
+import { useAuthContext } from "@/context/auth.context";
 
 export default function SignInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+
+  const { supabaseclient } = useAuthContext();
+
   const handleEmailChange = (e: any) => setEmail(e.target.value);
   const handlePasswordChange = (e: any) => setPassword(e.target.value);
-  const router = useRouter();
 
   const handleSignIn = async () => {
     try {
       await userSchema.validate({ email, password }, { abortEarly: false });
       startTransition(async () => {
-        const data = { email, password };
-
-        const result = await signInWithEmailAndPassword(data);
-        const { error } = JSON.parse(await result);
+        const { data, error } = await supabaseclient.auth.signInWithPassword({
+          email,
+          password,
+        });
 
         if (error?.message) {
           toast({
@@ -45,7 +48,9 @@ export default function SignInForm() {
               <code className="text-black">Inici de sessió correcte</code>
             ),
           });
-          // router.push("/add-event");
+
+          router.push("/add-event");
+
           router.refresh();
         }
       });

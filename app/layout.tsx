@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/nav/Navbar";
 import { GlobalContextProvider } from "@/context/events.context";
+import { AuthContextProvider } from "@/context/auth.context";
 import { Toaster } from "@/components/ui/toaster";
 import { Footer } from "@/components/Footer";
 
@@ -38,15 +39,17 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <GlobalContextProvider>
-            <main className="min-h-screen w-screen">
-              <Navbar />
-              {children}
-              <div className="bottom-0 absolute w-full">
-                <Footer />
-              </div>
-            </main>
-          </GlobalContextProvider>
+          <AuthContextProvider>
+            <GlobalContextProvider>
+              <main className="min-h-screen w-screen">
+                <Navbar />
+                {children}
+                <div className="bottom-0 absolute w-full">
+                  <Footer />
+                </div>
+              </main>
+            </GlobalContextProvider>
+          </AuthContextProvider>
         </ThemeProvider>
         <Toaster />
       </body>

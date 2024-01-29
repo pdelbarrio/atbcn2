@@ -1,6 +1,5 @@
 "use server";
 import { createSupabaseServerClient } from "../supabase";
-import { createServerClient } from "../supabase/supabaseServerClient";
 
 // export const revalidate = 60;
 

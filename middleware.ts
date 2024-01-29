@@ -17,6 +17,7 @@ export async function middleware(req: NextRequest) {
 
   if (!session) {
     // Redirect to /auth if there is no session
+
     return NextResponse.rewrite(url);
   } else {
     return NextResponse.rewrite(url2);

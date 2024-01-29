@@ -13,6 +13,7 @@ import { AnimatePresence } from "framer-motion";
 import PreviewModal from "@/components/PreviewModal";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { toast } from "@/components/ui/use-toast";
 
 export default function AddEvent() {
   const [name, setName] = useState<string>("");
@@ -43,11 +44,10 @@ export default function AddEvent() {
   } = useGlobalContext();
 
   useEffect(() => {
-    // console.log("useEffect 1 de banned users");
     const fetchBannedUsers = async () => {
       try {
         const { data, error } = await supabase.from("banned_users").select("*");
-        // console.log(data);
+
         if (error) {
           throw new Error(error.message);
         }
@@ -74,21 +74,26 @@ export default function AddEvent() {
       }
     }
     fetchSession();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const openModal = () => {
     const reasonIsBanned = isBannedUser(bannedUsers, createdBy);
 
     if (reasonIsBanned) {
-      // El usuario está baneado
-      // setErrorToast(
-      //   `ESTÁS BANEADO\nRazón: ${reasonIsBanned}. Contacta con atbcnapp@gmail.com`
-      // );
+      toast({
+        style: {
+          backgroundColor: "#fc0606",
+          color: "#000000",
+        },
+        description: (
+          <code className="text-black">{`usuari banejat\nmotiu: ${reasonIsBanned}. Contacta amb atbcnapp@gmail.com`}</code>
+        ),
+      });
       console.log("BANNED USER");
       return;
     }
 
-    // setShowModal(true);
     const formattedDate = date ? date.toISOString() : null;
     const eventDetails = {
       name: name,
@@ -177,7 +182,7 @@ export default function AddEvent() {
   };
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center pb-20">
       <div className="w-full max-w-md">
         <form
           onSubmit={handleSubmit}
