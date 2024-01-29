@@ -2,10 +2,11 @@
 import { createSupabaseServerClient } from "../supabase";
 import { createServerClient } from "../supabase/supabaseServerClient";
 
-const supabase = createSupabaseServerClient();
 // export const revalidate = 60;
 
 export async function getEvents() {
+  const supabase = createSupabaseServerClient();
+
   const currentDate = new Date();
   const { data, error } = await (await supabase)
     .from("events")
