@@ -285,16 +285,19 @@ export default function AddEvent() {
               </span>
             )}
           </div>
-          <div className="flex gap-4">
-            <div className="w-1/2 mb-4 text-left">
-              <Input
-                type="text"
-                placeholder="preu"
-                id="price"
-                className="w-full border border-primary dark:border-glow p-2 rounded-md"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-              />
+          <div className="flex mb-4 gap-4">
+            <div className="w-1/2 text-left">
+              <div>
+                <Input
+                  type="text"
+                  placeholder="preu"
+                  id="price"
+                  className="w-full border border-primary dark:border-glow p-2 rounded-md"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                />
+              </div>
+
               {(errors as EventFormErrors).price && (
                 <span className="text-red-500 font-bold italic text-xs">
                   {(errors as EventFormErrors).price}
@@ -302,7 +305,7 @@ export default function AddEvent() {
               )}
             </div>
 
-            <div className="flex items-center w-1/2 mb-4 text-right">
+            <div className="flex w-1/2 text-right">
               <DatePicker
                 className="w-full border border-primary dark:border-glow p-2 rounded-md"
                 minDate={new Date()}
@@ -318,7 +321,7 @@ export default function AddEvent() {
             </div>
           </div>
 
-          <div className="mb-4">
+          <div className="mb-4 mt-2">
             <Input
               type="text"
               placeholder="link"
