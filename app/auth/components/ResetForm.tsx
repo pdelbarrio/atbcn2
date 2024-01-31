@@ -33,8 +33,8 @@ export default function ResetForm() {
         // });
         const { data, error } = await supabaseclient.auth.resetPasswordForEmail(
           email,
-          { redirectTo: `${window.location.href}reset` }
-          // { redirectTo: "https://www.atbcn.info/reset" }
+          // { redirectTo: `${window.location.href}reset` }
+          { redirectTo: "https://www.atbcn.info/reset" }
         );
         if (data == null) {
           toast({
