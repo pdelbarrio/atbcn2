@@ -19,8 +19,8 @@ export default function ResetForm() {
       startTransition(async () => {
         const { data, error } = await supabaseclient.auth.resetPasswordForEmail(
           email,
-          // { redirectTo: `${window.location.href}update-user` }
-          { redirectTo: "https://www.atbcn.info/update-user" }
+          { redirectTo: `${window.location.href}reset` }
+          // { redirectTo: "https://www.atbcn.info/reset" }
         );
         setSuccess(true);
       });

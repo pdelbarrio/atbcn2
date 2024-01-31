@@ -10,6 +10,12 @@ export async function middleware(req: NextRequest) {
   url.pathname = "/auth";
   url2.pathname = "/add-event";
 
+  const publicUrls = ["/reset"];
+
+  if (publicUrls.includes(req.nextUrl.pathname)) {
+    return res;
+  }
+
   const supabase = await createSupabaseServerClient();
   const {
     data: { session },
