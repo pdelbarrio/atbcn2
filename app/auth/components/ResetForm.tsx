@@ -18,37 +18,37 @@ export default function ResetForm() {
   const sendResetPassword = async () => {
     try {
       startTransition(async () => {
-        toast({
-          style: {
-            backgroundColor: "#6ae95a",
-            color: "#000000",
-          },
-          description: (
-            <code className="text-black">
-              Reseteig temporalment inactiu, envia un correu a
-              <span className="font-bold"> atbcnapp@gmail.com</span> per poder
-              iniciar sessió amb el teu correu
-            </code>
-          ),
-        });
-        // const { data, error } = await supabaseclient.auth.resetPasswordForEmail(
-        //   email,
-        //   // { redirectTo: `${window.location.href}reset` }
-        //   { redirectTo: "https://www.atbcn.info/reset" }
-        // );
-        // if (data == null) {
-        //   toast({
-        //     style: {
-        //       backgroundColor: "#fc0606",
-        //       color: "#000000",
-        //     },
-        //     description: (
-        //       <code className="text-black">Possible email incorrecte</code>
-        //     ),
-        //   });
-        //   return;
-        // }
-        // setSuccess(true);
+        // toast({
+        //   style: {
+        //     backgroundColor: "#6ae95a",
+        //     color: "#000000",
+        //   },
+        //   description: (
+        //     <code className="text-black">
+        //       Reseteig temporalment inactiu, envia un correu a
+        //       <span className="font-bold"> atbcnapp@gmail.com</span> per poder
+        //       iniciar sessió amb el teu correu
+        //     </code>
+        //   ),
+        // });
+        const { data, error } = await supabaseclient.auth.resetPasswordForEmail(
+          email,
+          { redirectTo: `${window.location.href}reset` }
+          // { redirectTo: "https://www.atbcn.info/reset" }
+        );
+        if (data == null) {
+          toast({
+            style: {
+              backgroundColor: "#fc0606",
+              color: "#000000",
+            },
+            description: (
+              <code className="text-black">Possible email incorrecte</code>
+            ),
+          });
+          return;
+        }
+        setSuccess(true);
       });
     } catch (error) {
       console.log(error);
