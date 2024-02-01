@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/context/auth.context";
 import { FaEye } from "react-icons/fa";
 
-export default function SignInForm() {
+export default function ResetPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
   const [errors, setErrors] = useState({});

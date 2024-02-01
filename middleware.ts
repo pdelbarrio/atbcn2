@@ -10,7 +10,7 @@ export async function middleware(req: NextRequest) {
   url.pathname = "/auth";
   url2.pathname = "/add-event";
 
-  const publicUrls = ["/reset"];
+  const publicUrls = ["/reset","/update-user"];
 
   if (publicUrls.includes(req.nextUrl.pathname)) {
     return res;
