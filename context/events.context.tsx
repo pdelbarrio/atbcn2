@@ -4,13 +4,15 @@ import { EventContextType, PreviewEventType } from "@/lib/types";
 import { createContext, useContext, useState } from "react";
 import createSupabaseFrontendClient from "@/lib/supabase/supabase";
 
+interface GlobalContextProviderProps {
+  children: React.ReactNode;
+}
+
 const GlobalContext = createContext({} as EventContextType);
 
 export const GlobalContextProvider = ({
   children,
-}: {
-  children: React.ReactNode;
-}) => {
+}: GlobalContextProviderProps) => {
   const [previewEvent, setPreviewEvent] = useState<PreviewEventType | null>(
     null
   );

@@ -37,7 +37,7 @@ export default function CopyButton({ event }: { event: EventType }) {
   return (
     <div className="flex">
       <div
-        // className="hover:scale-105 relative hover:bg-zinc-700 p-2 rounded-md cursor-pointer"
+        data-testid="copy-button"
         className="hover:scale-105 relative bg-slate-500 p-2 rounded-md cursor-pointer"
         onClick={handleCopy}
       >
@@ -65,7 +65,6 @@ export default function CopyButton({ event }: { event: EventType }) {
           />
         </div>
       </div>
-      {/* <p className="text-xs ml-auto"> {onDone ? "Copiat" : ""}</p> */}
     </div>
   );
 }

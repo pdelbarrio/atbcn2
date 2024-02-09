@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest",
+    "test": "jest --verbose",
     "test:watch": "jest --watchAll"
   },
   "dependencies": {
@@ -26,6 +26,7 @@
     "cookies-next": "^2.1.1",
     "date-fns": "^3.2.0",
     "framer-motion": "^10.18.0",
+    "jest-date-mock": "^1.0.8",
     "lucide-react": "^0.299.0",
     "next": "14.0.4",
     "next-cloudinary": "^5.18.0",
@@ -51,6 +52,7 @@
     "@types/react-datepicker": "^4.19.5",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
+    "dotenv": "^16.4.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "eslint-plugin-jest-dom": "^5.1.0",

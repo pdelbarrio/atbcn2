@@ -1,8 +1,8 @@
 "use client";
 
 import { EventType } from "@/lib/types";
-import React, { useState } from "react";
-import Tag from "./Tag";
+import React from "react";
+import Tag from "../Tag";
 import { MdLocationOn } from "react-icons/md";
 import { GoClockFill } from "react-icons/go";
 import { IoTicket } from "react-icons/io5";
@@ -11,14 +11,13 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { formattedDate } from "@/lib/utils";
 import Image from "next/image";
-import CopyButton from "./CopyButton";
+import CopyButton from "../CopyButton/CopyButton";
 
 interface Props {
   event: EventType;
@@ -36,7 +35,10 @@ const EventRow = ({ event }: Props) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="bg-card dark:bg-gradient-dark rounded-lg dark:border dark:border-glow shadow-lg overflow-hidden mb-3 cursor-pointer touch:bg-gray-500">
+        <div
+          data-testid="event-row"
+          className="bg-card dark:bg-gradient-dark rounded-lg dark:border dark:border-glow shadow-lg overflow-hidden mb-3 cursor-pointer touch:bg-gray-500"
+        >
           <div className="flex flex-col p-4">
             {/* fecha / nombre / ubicación-precio */}
             <div className="flex justify-between mb-2">
@@ -51,7 +53,7 @@ const EventRow = ({ event }: Props) => {
                 </p>
                 <p className="text-gray-600"></p>
               </div>
-              <div className="w-1/4 md:text-right flex flex-col justify-between  text-text dark:text-glow ml-2 py-2 text-right">
+              <div className="w-1/4 md:text-right flex flex-col justify-between text-text dark:text-glow ml-2 py-2 text-right">
                 <p className="text-text text-sm md:text-base dark:text-glow">
                   {event.location}
                 </p>
@@ -69,7 +71,10 @@ const EventRow = ({ event }: Props) => {
           </div>
         </div>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] bg-white dark:bg-black">
+      <DialogContent
+        data-testid="event-dialog"
+        className="sm:max-w-[425px] bg-white dark:bg-black"
+      >
         <div
           style={{
             backgroundImage: `url(${event.poster})`,
@@ -93,9 +98,11 @@ const EventRow = ({ event }: Props) => {
               <div className="flex items-start">
                 <div className="w-2/3 pr-4">
                   {event.description && (
-                    <p className="text-black dark:text-glow text-base bg-slate-200 dark:bg-black p-1 rounded">
-                      {event.description}
-                    </p>
+                    <div className="description-container">
+                      <p className="text-black dark:text-glow text-sm bg-slate-200 dark:bg-black p-1 rounded">
+                        {event.description}
+                      </p>
+                    </div>
                   )}
                   <div className="mt-4">
                     <div className="flex flex-wrap mb-4">
@@ -135,18 +142,18 @@ const EventRow = ({ event }: Props) => {
                 <div className="flex items-center mt-2 bg-slate-200 dark:bg-glow rounded p-1">
                   <IoTicket className="text-black" />
                   <p className="ml-2 text-black text-sm dark:text-black">
-                    {event.price}
+                    <span>{event.price}</span>
                   </p>
                 </div>
                 {event.link && (
                   <div className="flex items-center mt-2 bg-slate-200 dark:bg-glow rounded p-1">
                     <FaLink className="text-black" />
 
-                    <p className="ml-2 text-black text-sm dark:text-black">
+                    <div className="ml-2 text-black text-sm dark:text-black">
                       <a href={event.link} target="_blank">
                         Link
                       </a>
-                    </p>
+                    </div>
                   </div>
                 )}
               </div>

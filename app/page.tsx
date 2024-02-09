@@ -1,5 +1,5 @@
 "use client";
-import EventList from "@/components/EventList";
+import EventList from "@/components/EventList/EventList";
 import { getEvents } from "@/lib/actions/events";
 import React from "react";
 

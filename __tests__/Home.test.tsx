@@ -48,7 +48,7 @@ const mockEvents = [
   },
 ];
 
-describe("Home", () => {
+describe("unit tests of the Home component", () => {
   beforeEach(() => {
     (getEvents as jest.Mock).mockResolvedValue(mockEvents);
   });
@@ -66,10 +66,24 @@ describe("Home", () => {
     expect(screen.getByTestId("loader")).toBeInTheDocument();
   });
 
+  // it("displays an error message when fetching events fails", async () => {
+  //   const mockError = new Error("Failed to fetch events");
+  //   (getEvents as jest.Mock).mockRejectedValue(mockError);
+  //   render(<Home />);
+  //   await screen.findByText(`Error: ${mockError.message}`);
+  // });
+
   it("displays an error message when fetching events fails", async () => {
+    // Mock the console.error function.
+    const consoleSpy = jest.spyOn(console, "error");
+    consoleSpy.mockImplementation(() => {});
+
     const mockError = new Error("Failed to fetch events");
     (getEvents as jest.Mock).mockRejectedValue(mockError);
     render(<Home />);
     await screen.findByText(`Error: ${mockError.message}`);
+
+    // Restore the console.error function.
+    consoleSpy.mockRestore();
   });
 });

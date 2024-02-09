@@ -13,7 +13,7 @@ export interface EventType {
   validated: boolean;
   completed: boolean;
   created_at: string;
-  created_by: number | null;
+  created_by: string;
 }
 
 export interface PreviewEventType {

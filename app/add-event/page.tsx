@@ -10,9 +10,8 @@ import DatePicker from "react-datepicker";
 import { ca } from "date-fns/locale";
 import { CldUploadWidget } from "next-cloudinary";
 import { AnimatePresence } from "framer-motion";
-import PreviewModal from "@/components/PreviewModal";
+import PreviewModal from "@/components/PreviewModal/PreviewModal";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { toast } from "@/components/ui/use-toast";
 
 export default function AddEvent() {
@@ -27,8 +26,6 @@ export default function AddEvent() {
   const [link, setLink] = useState<string>("");
   const [date, setDate] = useState<Date | null>(new Date());
   const [bannedUsers, setBannedUsers] = useState([]);
-
-  const router = useRouter();
 
   const {
     setPreviewEvent,
@@ -70,7 +67,7 @@ export default function AddEvent() {
       if (session.data.session?.user.email) {
         setCreatedBy(session.data.session?.user.email);
       } else {
-        router.push("/auth");
+        setCreatedBy("unkown user");
       }
     }
     fetchSession();
@@ -90,7 +87,7 @@ export default function AddEvent() {
           <code className="text-black">{`usuari banejat\nmotiu: ${reasonIsBanned}. Contacta amb atbcnapp@gmail.com`}</code>
         ),
       });
-      console.log("BANNED USER");
+
       return;
     }
 
@@ -363,7 +360,6 @@ export default function AddEvent() {
                 }}
                 uploadPreset="atbcnposter"
                 onSuccess={(result, { widget }) => {
-                  console.log(result?.info);
                   if (
                     typeof result?.info === "object" &&
                     result?.info !== null
@@ -400,7 +396,9 @@ export default function AddEvent() {
         </form>
       </div>
       <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
-        {showModal && Object.keys(errors).length === 0 && <PreviewModal />}
+        {showModal && Object.keys(errors).length === 0 && (
+          <PreviewModal data-testid="preview-modal" />
+        )}
       </AnimatePresence>
     </div>
   );

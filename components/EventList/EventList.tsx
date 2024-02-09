@@ -3,13 +3,13 @@
 import React, { useState } from "react";
 import { startOfWeek, endOfWeek, addWeeks, subWeeks } from "date-fns";
 import { formattedDate } from "@/lib/utils";
-import { LeftArrow, RightArrow } from "../components/Buttons";
+import { LeftArrow, RightArrow } from "../Buttons";
 import {
   IoIosArrowDropleftCircle,
   IoIosArrowDroprightCircle,
 } from "react-icons/io";
 import { EventType } from "@/lib/types";
-import EventRow from "./EventRow";
+import EventRow from "../EventRow/EventRow";
 
 interface Props {
   events: EventType[];
@@ -62,7 +62,7 @@ export default function EventList({ events }: any) {
       </div>
       <div>
         {eventsThisWeek.length > 0 ? (
-          <div>
+          <div suppressHydrationWarning>
             {eventsThisWeek.map((event: EventType) => (
               <EventRow event={event} key={event.id} />
             ))}
@@ -82,6 +82,7 @@ export default function EventList({ events }: any) {
               ""
             ) : (
               <button
+                data-testid="previous-week-button"
                 className=" text-gray-800 font-bold sm:p-1 dark:bg-glow rounded-full"
                 onClick={previousWeek}
                 disabled={isFirstWeek}
@@ -92,6 +93,7 @@ export default function EventList({ events }: any) {
           </div>
           <div>
             <button
+              data-testid="next-week-button"
               className="text-gray-800 font-bold sm:p-1 dark:bg-glow rounded-full"
               onClick={nextWeek}
             >
