@@ -39,7 +39,10 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="max-w-xl mx-auto p-2 md:max-w-1/2">
+    <nav
+      data-testid="atbcn-navbar"
+      className="max-w-xl mx-auto p-2 md:max-w-1/2"
+    >
       <div className="flex flex-col justify-start h-[120px]">
         <div className="flex justify-between mt-2">
           <div className="flex flex-col">

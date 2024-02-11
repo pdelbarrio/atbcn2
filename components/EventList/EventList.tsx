@@ -64,12 +64,15 @@ export default function EventList({ events }: any) {
         {eventsThisWeek.length > 0 ? (
           <div suppressHydrationWarning>
             {eventsThisWeek.map((event: EventType) => (
-              <EventRow event={event} key={event.id} />
+              <EventRow data-testid="event-row" event={event} key={event.id} />
             ))}
           </div>
         ) : (
           <div className="bg-card dark:bg-gradient-dark dark:border dark:border-glow rounded-lg shadow-lg overflow-hidden mb-3">
-            <p className="text-center p-10 text-text dark:text-glow font-bold">
+            <p
+              data-testid="noevents-message"
+              className="text-center p-10 text-text dark:text-glow font-bold"
+            >
               No hi ha esdeveniments introduïts per a aquesta setmana
             </p>
           </div>
