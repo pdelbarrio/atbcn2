@@ -72,6 +72,7 @@ export default function SignInForm() {
           <div className="px-8 pb-8">
             <div className="mb-4">
               <Input
+                data-testid="email-field"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="email"
                 type="email"
@@ -87,6 +88,7 @@ export default function SignInForm() {
             </div>
             <div className="mb-6">
               <Input
+                data-testid="password-field"
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                 id="password"
                 type="password"
@@ -103,6 +105,7 @@ export default function SignInForm() {
 
             <div className="flex flex-col">
               <button
+                data-testid="login-button"
                 className="h-[40px] w-full items-center justify-center flex gap-2 bg-card dark:bg-black dark:border dark:border-glow text-background dark:text-glow font-bold p-2 px-4 rounded mb-2"
                 type="button"
                 onClick={() => handleSignIn()}

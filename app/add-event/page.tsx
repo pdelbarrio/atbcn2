@@ -187,6 +187,7 @@ export default function AddEvent() {
         >
           <div className="mb-4">
             <Input
+              data-testid="event-name"
               type="text"
               placeholder="nom"
               id="name"
@@ -209,6 +210,7 @@ export default function AddEvent() {
 
           <div className="mb-4">
             <Textarea
+              data-testid="event-description"
               id="description"
               placeholder="descripció"
               className="w-full border border-primary dark:border-glow p-2 rounded-md"
@@ -234,6 +236,7 @@ export default function AddEvent() {
                 {tags?.map((tag, index) => (
                   <li
                     key={index}
+                    data-testid="event-tags"
                     className="inline-flex items-center justify-center h-8 px-3 text-sm font-medium text-white dark:text-glow dark:border dark:border-glow bg-gray-800 dark:bg-black rounded-md mr-2 mb-2"
                   >
                     <span className="mb-1">{tag}</span>
@@ -269,6 +272,7 @@ export default function AddEvent() {
 
           <div className="mb-4">
             <Input
+              data-testid="event-location"
               type="text"
               placeholder="ubicació"
               id="location"
@@ -286,6 +290,7 @@ export default function AddEvent() {
             <div className="w-1/2 text-left">
               <div>
                 <Input
+                  data-testid="event-price"
                   type="text"
                   placeholder="preu"
                   id="price"
@@ -304,6 +309,7 @@ export default function AddEvent() {
 
             <div className="flex w-1/2 text-right">
               <DatePicker
+                data-testid="event-date"
                 className="w-full border border-primary dark:border-glow p-2 rounded-md"
                 minDate={new Date()}
                 showTimeSelect
@@ -320,6 +326,7 @@ export default function AddEvent() {
 
           <div className="mb-4 mt-2">
             <Input
+              data-testid="event-link"
               type="text"
               placeholder="link"
               id="link"
@@ -386,6 +393,7 @@ export default function AddEvent() {
           <div className="mt-8 flex justify-between">
             <div></div>
             <button
+              data-testid="preview-button"
               type="submit"
               className="bg-card dark:bg-glow text-black dark:text-black font-bold p-2 px-4 rounded ml-auto mb-2"
               onClick={openModal}

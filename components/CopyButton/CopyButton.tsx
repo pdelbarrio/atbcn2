@@ -35,13 +35,14 @@ export default function CopyButton({ event }: { event: EventType }) {
   };
 
   return (
-    <div className="flex">
+    <div data-testid="share-button" className="flex">
       <div
         data-testid="copy-button"
         className="hover:scale-105 relative bg-slate-500 p-2 rounded-md cursor-pointer"
         onClick={handleCopy}
       >
         <IoCheckmarkOutline
+          data-testid="checkmark-icon"
           className={cn(
             "cursor-pointer transition-all w-5 h-5 text-green-500",
             onDone ? "scale-100" : "scale-0"

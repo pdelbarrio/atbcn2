@@ -90,13 +90,16 @@ const EventRow = ({ event }: Props) => {
           className="bg-cover"
         ></div>
         <DialogHeader>
-          <DialogTitle className="text-xl bg-slate-200 dark:bg-black font-semibold text-text dark:text-glow p-1 rounded">
+          <DialogTitle
+            data-testid="event-name"
+            className="text-xl bg-slate-200 dark:bg-black font-semibold text-text dark:text-glow p-1 rounded"
+          >
             {event.name}
           </DialogTitle>
           <DialogDescription>
             <div className="mt-6">
               <div className="flex items-start">
-                <div className="w-2/3 pr-4">
+                <div data-testid="event-description" className="w-2/3 pr-4">
                   {event.description && (
                     <div className="description-container">
                       <p className="text-black dark:text-glow text-sm bg-slate-200 dark:bg-black p-1 rounded">
@@ -106,7 +109,10 @@ const EventRow = ({ event }: Props) => {
                   )}
                   <div className="mt-4">
                     <div className="flex flex-wrap mb-4">
-                      <div className="h-10 flex items-center">
+                      <div
+                        data-testid="event-tags"
+                        className="h-10 flex items-center"
+                      >
                         {event.tags
                           ? event.tags.map((tag, id) => {
                               return <Tag key={id} tag={tag} />;
@@ -116,7 +122,7 @@ const EventRow = ({ event }: Props) => {
                     </div>
                   </div>
                 </div>
-                <div className="w-1/3">
+                <div data-testid="event-image" className="w-1/3">
                   <Image
                     className="w-full"
                     src={event.poster ? event.poster : defaultPoster}
@@ -127,26 +133,38 @@ const EventRow = ({ event }: Props) => {
                 </div>
               </div>
               <div className="mt-6">
-                <div className="flex items-center bg-slate-200 dark:bg-glow rounded p-1">
+                <div
+                  data-testid="event-location"
+                  className="flex items-center bg-slate-200 dark:bg-glow rounded p-1"
+                >
                   <MdLocationOn className="text-black" />
                   <p className="ml-2 text-black text-sm  dark:text-black">
                     {event.location}
                   </p>
                 </div>
-                <div className="flex items-center mt-2 bg-slate-200 dark:bg-glow rounded p-1">
+                <div
+                  data-testid="event-date"
+                  className="flex items-center mt-2 bg-slate-200 dark:bg-glow rounded p-1"
+                >
                   <GoClockFill className="text-black" />
                   <p className="ml-2 text-black text-sm dark:text-black">
                     {formattedDateStr}
                   </p>
                 </div>
-                <div className="flex items-center mt-2 bg-slate-200 dark:bg-glow rounded p-1">
+                <div
+                  data-testid="event-price"
+                  className="flex items-center mt-2 bg-slate-200 dark:bg-glow rounded p-1"
+                >
                   <IoTicket className="text-black" />
                   <p className="ml-2 text-black text-sm dark:text-black">
                     <span>{event.price}</span>
                   </p>
                 </div>
                 {event.link && (
-                  <div className="flex items-center mt-2 bg-slate-200 dark:bg-glow rounded p-1">
+                  <div
+                    data-testid="event-link"
+                    className="flex items-center mt-2 bg-slate-200 dark:bg-glow rounded p-1"
+                  >
                     <FaLink className="text-black" />
 
                     <div className="ml-2 text-black text-sm dark:text-black">
