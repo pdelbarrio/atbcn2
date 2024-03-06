@@ -78,7 +78,7 @@ const EventRow = ({ event }: Props) => {
         <div
           style={{
             backgroundImage: `url(${event.poster})`,
-            filter: "grayscale(100%)",
+            filter: "blur(5px)",
             opacity: "0.4",
             position: "absolute",
             top: 0,
