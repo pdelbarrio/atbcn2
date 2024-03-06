@@ -61,7 +61,9 @@ Este proyecto se encuentra bajo la licencia [MIT](LICENSE).
 - [x] Add middleware
 - [x] Restriction of event insertion to users based on their e-mail address
 - [x] Add unit testing with jest
-- [ ] Add e2e testing with Cypress
+- [x] Add e2e testing with Cypress
+- [x] Fixed styles of background image in Dialog of the Event Info
+- [x] Added zoomin onclick in the poster of each Modal info
 - [ ] Implement PWA functionality 
 
 

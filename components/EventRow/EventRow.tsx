@@ -1,7 +1,7 @@
 "use client";
 
 import { EventType } from "@/lib/types";
-import React from "react";
+import React, { useState } from "react";
 import Tag from "../Tag";
 import { MdLocationOn } from "react-icons/md";
 import { GoClockFill } from "react-icons/go";
@@ -24,10 +24,21 @@ interface Props {
 }
 
 const EventRow = ({ event }: Props) => {
+  const [isZoomed, setIsZoomed] = useState(false);
   const formattedDateStr = formattedDate(
     event.date,
     "eee, dd/MM/yyyy HH:mm'h'"
   );
+
+  const handleClick = () => {
+    setIsZoomed(!isZoomed);
+  };
+
+  const style = {
+    transform: isZoomed ? "scale(2)" : "scale(1)",
+    transformOrigin: "top right",
+    transition: "transform .3s",
+  };
 
   const defaultPoster =
     "https://res.cloudinary.com/getoutbcn/image/upload/v1680721784/samples/poster_sh7xqa.jpg";
@@ -124,11 +135,13 @@ const EventRow = ({ event }: Props) => {
                 </div>
                 <div data-testid="event-image" className="w-1/3">
                   <Image
-                    className="w-full"
+                    className="w-full cursor-pointer"
+                    style={style}
                     src={event.poster ? event.poster : defaultPoster}
                     alt={event.name}
                     width={200}
                     height={250}
+                    onClick={handleClick}
                   />
                 </div>
               </div>
