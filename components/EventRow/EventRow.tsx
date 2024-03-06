@@ -32,6 +32,13 @@ const EventRow = ({ event }: Props) => {
 
   const handleClick = () => {
     setIsZoomed(!isZoomed);
+
+    // Si se hace zoom, establece un timeout para volver al tamaño original después de 3 segundos
+    if (!isZoomed) {
+      setTimeout(() => {
+        setIsZoomed(false);
+      }, 2000);
+    }
   };
 
   const style = {
@@ -135,7 +142,7 @@ const EventRow = ({ event }: Props) => {
                 </div>
                 <div data-testid="event-image" className="w-1/3">
                   <Image
-                    className="w-full cursor-pointer"
+                    className="w-full cursor-pointer relative z-10"
                     style={style}
                     src={event.poster ? event.poster : defaultPoster}
                     alt={event.name}
@@ -191,7 +198,7 @@ const EventRow = ({ event }: Props) => {
             </div>
           </DialogDescription>
         </DialogHeader>
-        <div className="h-full w-full top-0 left-0 flex items-center justify-center">
+        <div className="flex h-full w-full top-0 left-0 items-center justify-center relative z-5">
           <CopyButton event={event} />
         </div>
       </DialogContent>
