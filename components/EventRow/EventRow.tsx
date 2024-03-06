@@ -126,18 +126,7 @@ const EventRow = ({ event }: Props) => {
                     </div>
                   )}
                   <div className="mt-4">
-                    <div className="flex flex-wrap mb-4">
-                      <div
-                        data-testid="event-tags"
-                        className="h-10 flex items-center"
-                      >
-                        {event.tags
-                          ? event.tags.map((tag, id) => {
-                              return <Tag key={id} tag={tag} />;
-                            })
-                          : null}
-                      </div>
-                    </div>
+                    <div className="flex flex-wrap mb-4"></div>
                   </div>
                 </div>
                 <div data-testid="event-image" className="w-1/3">
@@ -151,6 +140,13 @@ const EventRow = ({ event }: Props) => {
                     onClick={handleClick}
                   />
                 </div>
+              </div>
+              <div data-testid="event-tags" className="h-10 flex items-center">
+                {event.tags
+                  ? event.tags.map((tag, id) => {
+                      return <Tag key={id} tag={tag} />;
+                    })
+                  : null}
               </div>
               <div className="mt-6">
                 <div
