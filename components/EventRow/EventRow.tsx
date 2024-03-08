@@ -47,6 +47,14 @@ const EventRow = ({ event }: Props) => {
     transition: "transform .3s",
   };
 
+  const dayOfWeek = new Date(event.date).getDay();
+  let backgroundClass;
+  if (dayOfWeek === 0) {
+    backgroundClass = "bg-card2"; // Sunday
+  } else {
+    backgroundClass = dayOfWeek % 2 === 0 ? "bg-card" : "bg-card2"; // Alternating between bg-card and bg-card2 for other days
+  }
+
   const defaultPoster =
     "https://res.cloudinary.com/getoutbcn/image/upload/v1680721784/samples/poster_sh7xqa.jpg";
 
@@ -55,7 +63,7 @@ const EventRow = ({ event }: Props) => {
       <DialogTrigger asChild>
         <div
           data-testid="event-row"
-          className="bg-card dark:bg-gradient-dark rounded-lg dark:border dark:border-glow shadow-lg overflow-hidden mb-3 cursor-pointer touch:bg-gray-500"
+          className={`dark:bg-gradient-dark rounded-lg dark:border dark:border-glow shadow-lg overflow-hidden mb-3 cursor-pointer touch:bg-gray-500 ${backgroundClass}`}
         >
           <div className="flex flex-col p-4">
             {/* fecha / nombre / ubicación-precio */}
