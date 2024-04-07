@@ -1,28 +1,37 @@
 /** @type {import('next').NextConfig} */
 
-const nextConfig = {
+module.exports = {
   images: {
-    remotePatterns: [
-      {
-        hostname: "res.cloudinary.com",
-        protocol: "https",
-      },
-    ],
+    domains: ["res.cloudinary.com"],
   },
 };
 
-module.exports = nextConfig;
-
-// const withPWA = require("@ducanh2912/next-pwa").default({
-//   dest: "public",
-//   cacheOnFrontEndNav: true,
-//   aggressiveFrontEndNavCaching: true,
-//   reloadOnOnline: true,
-//   swcMinify: true,
-//   disable: false,
-//   workboxOptions: {
-//     disableDevLogs: true,
+// const nextConfig = {
+//   images: {
+//     remotePatterns: [
+//       {
+//         hostname: "res.cloudinary.com",
+//         protocol: "https",
+//       },
+//     ],
 //   },
+// };
+// /** @type {import('next').NextConfig} */
+
+// const withSerwist = require("@serwist/next").default({
+//   // Note: This is only an example. If you use Pages Router,
+//   // use something else that works, such as "service-worker/index.ts".
+//   swSrc: "app/sw.ts",
+//   swDest: "public/sw.js",
 // });
 
-// module.exports = withPWA(nextConfig);
+// module.exports = withSerwist({
+//   images: {
+//     remotePatterns: [
+//       {
+//         hostname: "res.cloudinary.com",
+//         protocol: "https",
+//       },
+//     ],
+//   },
+// });
