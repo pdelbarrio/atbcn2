@@ -93,6 +93,7 @@ Este proyecto se encuentra bajo la licencia [MIT](LICENSE).
 - [x] Fixed styles of background image in Dialog of the Event Info
 - [x] Added zoomin onclick in the poster of each Modal info
 - [ ] Implement PWA functionality 
+- [ ] Implement Add to Google Calendar 
 
 
 
