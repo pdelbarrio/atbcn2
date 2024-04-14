@@ -18,6 +18,7 @@ import {
 import { formattedDate } from "@/lib/utils";
 import Image from "next/image";
 import CopyButton from "../CopyButton/CopyButton";
+import { AddToCalendarButton } from "add-to-calendar-button-react";
 
 interface Props {
   event: EventType;
@@ -203,6 +204,16 @@ const EventRow = ({ event }: Props) => {
           </DialogDescription>
         </DialogHeader>
         <div className="flex h-full w-full top-0 left-0 items-center justify-center relative z-5">
+          <AddToCalendarButton
+            name={event.name}
+            options={["Google"]}
+            location={event.location}
+            startDate="2024-04-07" //TODO:Crear start date correcta y el resto de parámetros
+            endDate="2024-04-07" //TODO: Arreglar estilos para ver si se puede hacer más pequeño y separarlo del boton de copy
+            startTime="10:15"
+            endTime="23:30"
+            timeZone="America/Los_Angeles"
+          ></AddToCalendarButton>
           <CopyButton event={event} />
         </div>
       </DialogContent>
