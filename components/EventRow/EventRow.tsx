@@ -18,6 +18,8 @@ import {
 import { formattedDate } from "@/lib/utils";
 import Image from "next/image";
 import CopyButton from "../CopyButton/CopyButton";
+import { AddToCalendarButton } from "add-to-calendar-button-react";
+import { format, addHours } from "date-fns";
 
 interface Props {
   event: EventType;
@@ -25,6 +27,12 @@ interface Props {
 
 const EventRow = ({ event }: Props) => {
   const [isZoomed, setIsZoomed] = useState(false);
+  const eventDate = new Date(event.date);
+
+  const startDate = format(eventDate, "yyyy-MM-dd");
+  const startTime = format(eventDate, "HH:mm");
+
+  const endTime = format(addHours(eventDate, 2), "HH:mm");
   const formattedDateStr = formattedDate(
     event.date,
     "eee, dd/MM/yyyy HH:mm'h'"
@@ -203,6 +211,16 @@ const EventRow = ({ event }: Props) => {
           </DialogDescription>
         </DialogHeader>
         <div className="flex h-full w-full top-0 left-0 items-center justify-center relative z-5">
+          <AddToCalendarButton
+            name={event.name}
+            options={["Google"]}
+            location={event.location}
+            startDate={startDate}
+            endDate={startDate}
+            startTime={startTime}
+            endTime={endTime}
+            timeZone="Europe/Madrid"
+          ></AddToCalendarButton>
           <CopyButton event={event} />
         </div>
       </DialogContent>
