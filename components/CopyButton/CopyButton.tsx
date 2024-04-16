@@ -35,7 +35,7 @@ export default function CopyButton({ event }: { event: EventType }) {
   };
 
   return (
-    <div data-testid="share-button" className="flex">
+    <div data-testid="share-button" className="w-12 h-12">
       <div
         data-testid="copy-button"
         className="hover:scale-105 relative bg-slate-500 p-2 rounded-md cursor-pointer"
