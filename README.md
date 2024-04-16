@@ -92,8 +92,10 @@ Este proyecto se encuentra bajo la licencia [MIT](LICENSE).
 - [x] Add e2e testing with Cypress
 - [x] Fixed styles of background image in Dialog of the Event Info
 - [x] Added zoomin onclick in the poster of each Modal info
-- [ ] Implement PWA functionality 
-- [ ] Implement Add to Google Calendar 
+- [x] Implement PWA functionality 
+- [x] Implement Add to Google Calendar 
+- [ ] Improve PWA functionality as it is not very stable 
+- [ ] Add a dropdown with the locations that is also a link to the location on google maps
 
 
 
