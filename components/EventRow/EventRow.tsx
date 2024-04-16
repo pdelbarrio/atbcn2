@@ -210,7 +210,7 @@ const EventRow = ({ event }: Props) => {
             </div>
           </DialogDescription>
         </DialogHeader>
-        <div className="flex h-full w-full top-0 left-0 items-center justify-between relative z-5">
+        <div className="flex h-full w-full top-0 place-items-center left-0 justify-between relative z-5">
           <AddToCalendarButton
             name={event.name}
             options={["Google"]}
