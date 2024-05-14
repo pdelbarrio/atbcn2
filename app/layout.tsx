@@ -15,10 +15,44 @@ const nunito = Nunito({
   display: "swap",
 });
 
+const APP_NAME = "@bcn";
+const APP_DEFAULT_TITLE = "atbcn.info";
+const APP_TITLE_TEMPLATE = "@bcn";
+const APP_DESCRIPTION = "Troba i afegeix esdeveniments culturals de Barcelona";
+
 export const metadata: Metadata = {
-  manifest: "/manifest.json",
-  title: "@bcn",
-  description: "Troba i afegeix esdeveniments culturals de Barcelona",
+  applicationName: APP_NAME,
+  title: {
+    default: APP_DEFAULT_TITLE,
+    template: APP_TITLE_TEMPLATE,
+  },
+  description: APP_DESCRIPTION,
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: APP_DEFAULT_TITLE,
+    // startUpImage: [],
+  },
+  formatDetection: {
+    telephone: false,
+  },
+  openGraph: {
+    type: "website",
+    siteName: APP_NAME,
+    title: {
+      default: APP_DEFAULT_TITLE,
+      template: APP_TITLE_TEMPLATE,
+    },
+    description: APP_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary",
+    title: {
+      default: APP_DEFAULT_TITLE,
+      template: APP_TITLE_TEMPLATE,
+    },
+    description: APP_DESCRIPTION,
+  },
 };
 
 export const viewport: Viewport = {

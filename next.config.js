@@ -1,5 +1,9 @@
-/** @type {import('next').NextConfig} */
+const {
+  PHASE_DEVELOPMENT_SERVER,
+  PHASE_PRODUCTION_BUILD,
+} = require("next/constants");
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -11,18 +15,32 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+/** @type {(phase: string, defaultConfig: import("next").NextConfig) => Promise<import("next").NextConfig>} */
+module.exports = async (phase) => {
+  if (phase === PHASE_DEVELOPMENT_SERVER || phase === PHASE_PRODUCTION_BUILD) {
+    const withSerwist = (await import("@serwist/next")).default({
+      // Note: This is only an example. If you use Pages Router,
+      // use something else that works, such as "service-worker/index.ts".
+      swSrc: "app/sw.ts",
+      swDest: "public/sw.js",
+    });
+    return withSerwist(nextConfig);
+  }
 
-// const withPWA = require("@ducanh2912/next-pwa").default({
-//   dest: "public",
-//   cacheOnFrontEndNav: true,
-//   aggressiveFrontEndNavCaching: true,
-//   reloadOnOnline: true,
-//   swcMinify: true,
-//   disable: false,
-//   workboxOptions: {
-//     disableDevLogs: true,
+  return nextConfig;
+};
+
+// /** @type {import('next').NextConfig} */
+
+// const nextConfig = {
+//   images: {
+//     remotePatterns: [
+//       {
+//         hostname: "res.cloudinary.com",
+//         protocol: "https",
+//       },
+//     ],
 //   },
-// });
+// };
 
-// module.exports = withPWA(nextConfig);
+// module.exports = nextConfig;

@@ -95,6 +95,7 @@ Este proyecto se encuentra bajo la licencia [MIT](LICENSE).
 - [x] Implement PWA functionality 
 - [x] Implement Add to Google Calendar 
 - [ ] Improve PWA functionality as it is not very stable 
+- [ ] Add a multistep form to improve UX when filling info of events
 - [ ] Add a dropdown with the locations that is also a link to the location on google maps
 
 
