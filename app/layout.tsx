@@ -31,7 +31,6 @@ export const metadata: Metadata = {
     capable: true,
     statusBarStyle: "default",
     title: APP_DEFAULT_TITLE,
-    // startUpImage: [],
   },
   formatDetection: {
     telephone: false,
@@ -77,7 +76,7 @@ export default function RootLayout({
             <GlobalContextProvider>
               <main className="min-h-screen w-screen">
                 <Navbar />
-                {children}
+                <div className="flex-grow">{children}</div>
                 <div className="bottom-0 absolute w-full">
                   <Footer />
                 </div>
